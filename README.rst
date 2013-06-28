@@ -23,9 +23,10 @@ Config
 - Admin is enabled by default
 - ``SECRET_KEY`` and other configuration variables are read from env, instead of
   writing them into your settings file.
-- There's a ``test.sh`` script in the root directory that runs all tests and
+- There's a ``test.sh`` script in the project directory that runs all tests and
   shows coverage information afterwards.
-- Database configuration is read from environment
+- Database configuration is read from environment.
+- Coverage configuration is inside ``{{ project_name }}/.coveragerc``.
 
 Apps
 ~~~~
@@ -42,7 +43,7 @@ Usage
 Install Django::
 
     $ mkvirtualenv {{ project_name }}
-    $ pip install Django==1.5.1
+    $ pip install "Django>=1.5,<1.6"
 
 Create a new project::
 
@@ -57,7 +58,8 @@ Install dependencies::
 
 Fix permissions::
 
-    $ chmod +x test.sh {{ project_name }}/manage.py
+    $ cd {{ project_name }}
+    $ chmod +x test.sh manage.py
 
 Set environment variables::
 
@@ -69,9 +71,13 @@ Set environment variables::
 
 Initialize database::
 
-    $ cd {{ project_name }}
+    $ createdb {{ project_name }}
     $ ./manage.py syncdb --all
     $ ./manage.py migrate --fake
+
+Test setup::
+
+    $ ./test.sh
 
 It is recommended that now you pin your dependency versions in the requirements
 files.
