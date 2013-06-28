@@ -73,6 +73,9 @@ Initialize database::
     $ ./manage.py syncdb --all
     $ ./manage.py migrate --fake
 
+It is recommended that now you pin your dependency versions in the requirements
+files.
+
 .. _django-debug-toolbar: https://github.com/django-debug-toolbar/django-debug-toolbar
 .. _django-discover-runner: https://github.com/jezdez/django-discover-runner
 .. _django-extensions: https://github.com/django-extensions/django-extensions

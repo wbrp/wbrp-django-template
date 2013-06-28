@@ -1,8 +1,8 @@
 # Django base system
-Django==1.5.1
-Unipath==1.0
-South==0.8.1
+Django>=1.5,<1.6
+Unipath
+South
 
 # Databases
-psycopg2==2.5.1
-dj-database-url==0.2.1
+psycopg2
+dj-database-url
