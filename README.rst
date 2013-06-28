@@ -25,6 +25,7 @@ Config
   writing them into your settings file.
 - There's a ``test.sh`` script in the root directory that runs all tests and
   shows coverage information afterwards.
+- Database configuration is read from environment
 
 Apps
 ~~~~
@@ -40,15 +41,15 @@ Usage
 
 Install Django::
 
-    $ mkvirtualenv <project_name>
+    $ mkvirtualenv {{ project_name }}
     $ pip install Django==1.5.1
 
 Create a new project::
 
-    $ django-admin.py startproject <project_name> \
+    $ django-admin.py startproject {{ project_name }} \
         --template=https://github.com/wbrp/wbrp-django-template/archive/master.zip \
         --extension py,rst,sh
-    $ cd <project_name>
+    $ cd {{ project_name }}
 
 Install dependencies::
 
@@ -56,8 +57,21 @@ Install dependencies::
 
 Fix permissions::
 
-    $ chmod +x <project_name>/manage.py
+    $ chmod +x test.sh {{ project_name }}/manage.py
 
+Set environment variables::
+
+    $ POSTACTIVATE=$VIRTUAL_ENV/$VIRTUALENVWRAPPER_ENV_BIN_DIR/postactivate
+    $ echo "export DJANGO_DEBUG=True" >> $POSTACTIVATE
+    $ echo "export PORT=8000" >> $POSTACTIVATE
+    $ echo "export DATABASE_URL='postgres://localhost/{{ project_name }}'" >> $POSTACTIVATE
+    $ source $POSTACTIVATE
+
+Initialize database::
+
+    $ cd {{ project_name }}
+    $ ./manage.py syncdb --all
+    $ ./manage.py migrate --fake
 
 .. _django-debug-toolbar: https://github.com/django-debug-toolbar/django-debug-toolbar
 .. _django-discover-runner: https://github.com/jezdez/django-discover-runner

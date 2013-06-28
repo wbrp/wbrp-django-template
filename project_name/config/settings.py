@@ -6,6 +6,7 @@ import os
 
 from django.core.exceptions import ImproperlyConfigured
 
+import dj_database_url
 from unipath import Path
 
 
@@ -36,14 +37,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
+    'default': dj_database_url.config(),
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
