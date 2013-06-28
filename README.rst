@@ -29,6 +29,17 @@ Config
 - Database configuration is read from environment.
 - Coverage configuration is inside ``{{ project_name }}/.coveragerc``.
 
+Auth
+~~~~
+
+- Authentication is done via `django-social-auth`_.
+- By default, Google OAuth2 is enabled, but without offline access. If you want
+  offline access, comment out the ``GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS`` line in
+  your ``settings.py``.
+- To enable additional OAuth2 scopes, edit ``GOOGLE_OAUTH_EXTRA_SCOPE``.
+- To limit login to people from a specific domain, add them to
+  ``GOOGLE_WHITE_LISTED_DOMAINS``.
+
 Apps
 ~~~~
 
@@ -36,6 +47,7 @@ Apps
 - `django-discover-runner`_
 - `django-extensions`_
 - `django-messagegroups`_
+- `django-social-auth`_
 - `south`_
 
 
@@ -69,6 +81,8 @@ Set environment variables::
     $ echo "export DJANGO_DEBUG=True" >> $POSTACTIVATE
     $ echo "export PORT=8000" >> $POSTACTIVATE
     $ echo "export DATABASE_URL='postgres://localhost/{{ project_name }}'" >> $POSTACTIVATE
+    $ echo "export GOOGLE_OAUTH2_CLIENT_ID='<client_id>'" >> $POSTACTIVATE
+    $ echo "export GOOGLE_OAUTH2_CLIENT_SECRET='<client_secret>'" >> $POSTACTIVATE
     $ source $POSTACTIVATE
 
 Initialize database::
@@ -80,6 +94,7 @@ Initialize database::
 Test setup::
 
     $ ./test.sh
+    $ ./manage.py runserver
 
 There should be one passing test. It is recommended that now you pin your
 dependency versions in the requirements files.
