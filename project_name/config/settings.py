@@ -165,6 +165,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+
+    'south',
 )
 
 if DEBUG:
@@ -201,6 +203,9 @@ LOGGING = {
         },
     }
 }
+
+# Testing
+SOUTH_TESTS_MIGRATE = False
 
 # Debug toolbar
 DEBUG_TOOLBAR_CONFIG = {

@@ -25,8 +25,9 @@ Config
 Apps
 ~~~~
 
-- `django-extensions`_
 - `django-debug-toolbar`_
+- `django-extensions`_
+- `south`_
 
 
 Usage
@@ -46,5 +47,6 @@ Install dependencies::
     $ pip install -r requirements/local.txt
 
 
-.. _django-extensions: https://github.com/django-extensions/django-extensions
 .. _django-debug-toolbar: https://github.com/django-debug-toolbar/django-debug-toolbar
+.. _django-extensions: https://github.com/django-extensions/django-extensions
+.. _south: http://south.aeracode.org/
