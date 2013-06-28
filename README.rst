@@ -19,6 +19,8 @@ Config
 ~~~~~~
 
 - Admin is enabled by default
+- `SECRET_KEY` and other configuration variables are read from env, instead of
+  writing them into your settings file.
 
 Apps
 ~~~~

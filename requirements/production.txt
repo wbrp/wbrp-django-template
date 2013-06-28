@@ -1,0 +1,4 @@
+# Django base system
+Django==1.5.1
+psycopg==2.5.1
+Unipath==1.0
