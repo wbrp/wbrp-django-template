@@ -12,8 +12,9 @@ Layout
 ~~~~~~
 
 - The Django project itself is moved down one level into a separate folder
-- The main app lives inside a folder called ``config``
 - Requirements are split up into several files
+- The main app lives inside a folder called ``config``
+- There is a default app for the frontend called ``front``.
 - Tests should go into a ``tests`` subdirectory inside the apps and be named
   ``test*.py``.
 
@@ -79,8 +80,8 @@ Test setup::
 
     $ ./test.sh
 
-It is recommended that now you pin your dependency versions in the requirements
-files.
+There should be one passing test. It is recommended that now you pin your
+dependency versions in the requirements files.
 
 .. _django-debug-toolbar: https://github.com/django-debug-toolbar/django-debug-toolbar
 .. _django-discover-runner: https://github.com/jezdez/django-discover-runner
