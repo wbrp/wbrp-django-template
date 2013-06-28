@@ -27,6 +27,7 @@ true_values = ['1', 'true', 'y', 'yes', 1, True]
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+SHOW_DEBUG_TOOLBAR = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -48,6 +49,9 @@ DATABASES = {
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
+
+# Internal IPs
+INTERNAL_IPS = ('127.0.0.1',)
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -163,6 +167,12 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 )
 
+if DEBUG:
+    INSTALLED_APPS += (
+        'django_extensions',
+        'debug_toolbar',
+    )
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -190,4 +200,10 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+# Debug toolbar
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+    'SHOW_TOOLBAR_CALLBACK': lambda request: SHOW_DEBUG_TOOLBAR
 }

@@ -1,1 +1,10 @@
 -r production.txt
+
+# Useful stuff
+django-extensions==1.1.1
+
+# Debugging
+django-debug-toolbar==0.9
+
+# Testing
+django-discover-runner==1.0

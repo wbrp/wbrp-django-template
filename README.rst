@@ -25,7 +25,8 @@ Config
 Apps
 ~~~~
 
-- ...
+- `django-extensions`_
+- `django-debug-toolbar`_
 
 
 Usage
@@ -43,3 +44,7 @@ Fix permissions::
 Install dependencies::
 
     $ pip install -r requirements/local.txt
+
+
+.. _django-extensions: https://github.com/django-extensions/django-extensions
+.. _django-debug-toolbar: https://github.com/django-debug-toolbar/django-debug-toolbar
