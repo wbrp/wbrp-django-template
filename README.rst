@@ -14,16 +14,16 @@ Layout
 - The Django project itself is moved down one level into a separate folder
 - The main app lives inside a folder called ``config``
 - Requirements are split up into several files
-- Tests should go into a `tests` subdirectory inside the apps and be named
-  `test*.py`.
+- Tests should go into a ``tests`` subdirectory inside the apps and be named
+  ``test*.py``.
 
 Config
 ~~~~~~
 
 - Admin is enabled by default
-- `SECRET_KEY` and other configuration variables are read from env, instead of
+- ``SECRET_KEY`` and other configuration variables are read from env, instead of
   writing them into your settings file.
-- There's a `test.sh` script in the root directory that runs all tests and
+- There's a ``test.sh`` script in the root directory that runs all tests and
   shows coverage information afterwards.
 
 Apps
@@ -38,19 +38,25 @@ Apps
 Usage
 -----
 
+Install Django::
+
+    $ mkvirtualenv <project_name>
+    $ pip install Django==1.5.1
+
 Create a new project::
 
     $ django-admin.py startproject <project_name> \
         --template=https://github.com/wbrp/wbrp-django-template/archive/master.zip \
         --extension py,rst,sh
-
-Fix permissions::
-
-    $ chmod +x <project_name>/manage.py
+    $ cd <project_name>
 
 Install dependencies::
 
     $ pip install -r requirements/local.txt
+
+Fix permissions::
+
+    $ chmod +x <project_name>/manage.py
 
 
 .. _django-debug-toolbar: https://github.com/django-debug-toolbar/django-debug-toolbar
