@@ -4,11 +4,19 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', '{{ project_name }}.views.home', name='home'),
-    # url(r'^{{ project_name }}/', include('{{ project_name }}.foo.urls')),
-
     # Django admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+
+    # Front URLs
+    url(r'', include('front.urls')),
 )
+
+# Static and media files
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+                {'document_root': settings.STATIC_ROOT, 'show_indexes': False,}),
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+                {'document_root': settings.MEDIA_ROOT, 'show_indexes': False,}),
+    )

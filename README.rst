@@ -35,6 +35,7 @@ Apps
 - `django-debug-toolbar`_
 - `django-discover-runner`_
 - `django-extensions`_
+- `django-messagegroups`_
 - `south`_
 
 
@@ -86,4 +87,6 @@ dependency versions in the requirements files.
 .. _django-debug-toolbar: https://github.com/django-debug-toolbar/django-debug-toolbar
 .. _django-discover-runner: https://github.com/jezdez/django-discover-runner
 .. _django-extensions: https://github.com/django-extensions/django-extensions
+.. _django-messagegroups: https://github.com/dbrgn/django-messagegroups
+.. _django-social-auth: https://github.com/omab/django-social-auth
 .. _south: http://south.aeracode.org/

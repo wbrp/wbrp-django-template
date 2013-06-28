@@ -6,3 +6,6 @@ South
 # Databases
 psycopg2
 dj-database-url
+
+# Frontend
+django-messagegroups
