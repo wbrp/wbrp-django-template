@@ -214,7 +214,7 @@ if DEBUG:
 AUTH_USER_MODEL = 'front.User'
 AUTHENTICATION_BACKENDS = ('social_auth.backends.google.GoogleOAuth2Backend',)
 LOGIN_URL = '/auth/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/auth/login-successful/'
 LOGIN_ERROR_URL = '/auth/login-error/'
 GOOGLE_OAUTH2_CLIENT_ID = require_env('GOOGLE_OAUTH2_CLIENT_ID')
 GOOGLE_OAUTH2_CLIENT_SECRET = require_env('GOOGLE_OAUTH2_CLIENT_SECRET')

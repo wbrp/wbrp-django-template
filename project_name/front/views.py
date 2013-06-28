@@ -12,11 +12,18 @@ class HomeView(TemplateView):
 
 
 class LoginView(View):
-    """Redirect to login view, show a message."""
+    """Redirect to real login view."""
+
+    def get(self, request, *args, **kwargs):
+        return redirect('socialauth_begin', backend='google-oauth2')
+
+
+class LoginSuccessfulView(View):
+    """Redirect to home view, show a message."""
 
     def get(self, request, *args, **kwargs):
         messages.add_message(request, messages.SUCCESS, 'You have successfully logged in.')
-        return redirect('socialauth_begin', backend='google-oauth2')
+        return redirect('home')
 
 
 class LogoutView(View):
