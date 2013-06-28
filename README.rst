@@ -31,7 +31,15 @@ Apps
 Usage
 -----
 
-::
+Create a new project::
 
     $ django-admin.py startproject <project_name> \
         --template=https://github.com/wbrp/wbrp-django-template/archive/master.zip
+
+Fix permissions::
+
+    $ chmod +x <project_name>/manage.py
+
+Install dependencies::
+
+    $ pip install -r requirements/local.txt
