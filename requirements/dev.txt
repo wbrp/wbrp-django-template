@@ -5,7 +5,9 @@ django-extensions
 
 # Debugging
 django-debug-toolbar
+ipdb
 
 # Testing
-django-discover-runner
-coverage
+pytest-django
+pytest-cov
+pytest-pep8
