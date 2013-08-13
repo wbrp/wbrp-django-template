@@ -15,7 +15,10 @@ class LoginView(View):
     """Redirect to real login view."""
 
     def get(self, request, *args, **kwargs):
-        return redirect('socialauth_begin', backend='google-oauth2')
+        url = resolve_url('socialauth_begin', backend='google-oauth2')
+        # Keep query string (especially "next" parameter)
+        full_url = '%s?%s' % (url, request.GET.urlencode()) 
+        return redirect(full_url)
 
 
 class LoginSuccessfulView(View):
