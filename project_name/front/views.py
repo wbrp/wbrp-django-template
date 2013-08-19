@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.shortcuts import redirect
@@ -15,7 +16,7 @@ class LoginView(View):
     """Redirect to real login view."""
 
     def get(self, request, *args, **kwargs):
-        url = resolve_url('socialauth_begin', backend='google-oauth2')
+        url = reverse('socialauth_begin', args=('google-oauth2',))
         # Keep query string (especially "next" parameter)
         full_url = '%s?%s' % (url, request.GET.urlencode()) 
         return redirect(full_url)
