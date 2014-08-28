@@ -1,5 +1,5 @@
 {% load messagegroups %}
-<!doctype html>                                                                                                                                       
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -11,10 +11,9 @@
     <![endif]-->
     <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
 
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
     {% endblock %}
 </head>
 
@@ -30,10 +29,9 @@
         </div>
     </div>
 
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     {% block scripts %}
-        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
         <script src="{{ STATIC_URL }}js/scripts.js"></script>
     {% endblock scripts %}
-
 </body>
 </html>
