@@ -1,8 +1,7 @@
 wbrp-django-template
 ====================
 
-This is our custom Django project template at Webrepublic. It is based on the
-Django 1.5.1 standard template and has been updated for Django 1.7.
+This is our custom Django 1.7 project template at Webrepublic.
 
 
 Features
@@ -31,11 +30,12 @@ Auth
 
 - Authentication is done via python-social-auth_.
 - By default, Google OAuth2 is enabled, but without offline access. If you want
-  offline access, comment out the ``GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS`` line in
-  your ``settings.py``.
-- To enable additional OAuth2 scopes, edit ``GOOGLE_OAUTH_EXTRA_SCOPE``.
+  offline access, comment out the
+  ``SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS`` line in your
+  ``settings.py``.
+- To enable additional OAuth2 scopes, edit ``SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_SCOPE``.
 - To limit login to people from a specific domain, add them to
-  ``GOOGLE_WHITE_LISTED_DOMAINS``.
+  ``SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS``.
 
 Testing
 ~~~~~~~
