@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # Auth
-    url(r'^auth/', include('social_auth.urls')),
+    url(r'^auth/', include('social.apps.django_app.urls', namespace='social')),
 
     # Front URLs
     url(r'', include('front.urls')),

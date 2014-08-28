@@ -34,14 +34,12 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-MANAGERS = ADMINS
-
 DATABASES = {
     'default': dj_database_url.config(),
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
-# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+# See https://docs.djangoproject.com/en/1.7/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
 
 # Internal IPs
@@ -56,8 +54,6 @@ TIME_ZONE = 'Europe/Zurich'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
-
-SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -113,25 +109,19 @@ if SECRET_KEY == 'DEBUG_SECRET_KEY' and DEBUG is False:
     raise ImproperlyConfigured('Missing SECRET_KEY env variable. You can ' +
             'generate one with `./manage.py generate_secret_key`.')
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.eggs.Loader',
-)
-
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'config.urls'
 
-# Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'config.wsgi.application'
 
 TEMPLATE_DIRS = (
@@ -148,23 +138,21 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
-    'social_auth.context_processors.social_auth_by_name_backends',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
 )
 
 INSTALLED_APPS = (
     # Builtin apps
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
 
     # 3rd party apps
-    'south',
-    'social_auth',
+    'social.apps.django_app.default',
     'messagegroups',
 
     # Own apps
@@ -212,30 +200,47 @@ if DEBUG:
 
 # Auth
 AUTH_USER_MODEL = 'front.User'
-AUTHENTICATION_BACKENDS = ('social_auth.backends.google.GoogleOAuth2Backend',)
-LOGIN_URL = '/auth/login/'
-LOGIN_REDIRECT_URL = '/auth/login-successful/'
-LOGIN_ERROR_URL = '/auth/login-error/'
-GOOGLE_OAUTH2_CLIENT_ID = require_env('GOOGLE_OAUTH2_CLIENT_ID')
-GOOGLE_OAUTH2_CLIENT_SECRET = require_env('GOOGLE_OAUTH2_CLIENT_SECRET')
-#GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {'access_type': 'offline'}
-GOOGLE_OAUTH_EXTRA_SCOPE = [
+AUTHENTICATION_BACKENDS = (
+    'social.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_LOGIN_URL = '/auth/login/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/auth/login-successful/'
+OSCIAL_AUTH_LOGIN_ERROR_URL = '/auth/login-error/'
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
+SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
+SOCIAL_AUTH_UUID_LENGTH = 8
+SOCIAL_AUTH_SLUGIFY_USERNAMES = True
+SOCIAL_AUTH_URLOPEN_TIMEOUT = 15
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+SOCIAL_AUTH_SANITIZE_REDIRECTS = True
+SOCIAL_AUTH_GOOGLE_OAUTH2_CLIENT_KEY = require_env('GOOGLE_OAUTH2_CLIENT_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_CLIENT_SECRET = require_env('GOOGLE_OAUTH2_CLIENT_SECRET')
+#SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {'access_type': 'offline'}
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_SCOPE = [
     # Add extra scopes here, e.g.
     # 'https://www.googleapis.com/auth/userinfo.profile',
     # 'https://adwords.google.com/api/adwords',
 ]
-#GOOGLE_WHITE_LISTED_DOMAINS = []
-SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
-SOCIAL_AUTH_DEFAULT_USERNAME = 'socialauth_user'
-SOCIAL_AUTH_UUID_LENGTH = 8
-SOCIAL_AUTH_SLUGIFY_USERNAMES = True
-SOCIAL_AUTH_URLOPEN_TIMEOUT = 15
-
-# Testing
-SOUTH_TESTS_MIGRATE = False
+SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = []
+SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_EMAILS = []
 
 # Debug toolbar
+show_debug_toolbar = lambda request: SHOW_DEBUG_TOOLBAR
 DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-    'SHOW_TOOLBAR_CALLBACK': lambda request: SHOW_DEBUG_TOOLBAR
+    'SHOW_TOOLBAR_CALLBACK': 'config.settings.show_debug_toolbar',
 }
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+]

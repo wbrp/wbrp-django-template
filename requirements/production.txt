@@ -1,14 +1,15 @@
 # Django base system
-Django>=1.5,<1.6
+#Django>=1.7,<1.8
+https://www.djangoproject.com/download/1.7c3/tarball/
 Unipath
-South
+pytz
 
 # Databases
 psycopg2
 dj-database-url
 
 # Auth
-django-social-auth
+python-social-auth
 
 # Frontend
 django-messagegroups

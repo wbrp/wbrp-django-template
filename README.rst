@@ -2,7 +2,7 @@ wbrp-django-template
 ====================
 
 This is our custom Django project template at Webrepublic. It is based on the
-Django 1.5.1 standard template.
+Django 1.5.1 standard template and has been updated for Django 1.7.
 
 
 Features
@@ -29,7 +29,7 @@ Config
 Auth
 ~~~~
 
-- Authentication is done via django-social-auth_.
+- Authentication is done via python-social-auth_.
 - By default, Google OAuth2 is enabled, but without offline access. If you want
   offline access, comment out the ``GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS`` line in
   your ``settings.py``.
@@ -58,8 +58,7 @@ Apps
 - django-debug-toolbar_
 - django-extensions_
 - django-messagegroups_
-- django-social-auth_
-- south_
+- python-social-auth_
 - pytest_
 - pytest-django_
 - pytest-cov_
@@ -72,7 +71,7 @@ Usage
 Install Django::
 
     mkvirtualenv {{ project_name }}
-    pip install "Django>=1.5,<1.6"
+    pip install "Django>=1.7,<1.8"
 
 Create a new project::
 
@@ -96,15 +95,14 @@ Set environment variables::
     echo "export DJANGO_DEBUG=True" >> $POSTACTIVATE
     echo "export PORT=8000" >> $POSTACTIVATE
     echo "export DATABASE_URL='postgres://localhost/{{ project_name }}'" >> $POSTACTIVATE
-    echo "export GOOGLE_OAUTH2_CLIENT_ID='<client_id>'" >> $POSTACTIVATE
+    echo "export GOOGLE_OAUTH2_CLIENT_KEY='<client_key>'" >> $POSTACTIVATE
     echo "export GOOGLE_OAUTH2_CLIENT_SECRET='<client_secret>'" >> $POSTACTIVATE
     source $POSTACTIVATE
 
 Initialize database::
 
     createdb {{ project_name }}
-    ./manage.py syncdb --all
-    ./manage.py migrate --fake
+    ./manage.py migrate
 
 Test setup::
 
@@ -117,8 +115,7 @@ now you pin your dependency versions in the requirements files.
 .. _django-debug-toolbar: https://github.com/django-debug-toolbar/django-debug-toolbar
 .. _django-extensions: https://github.com/django-extensions/django-extensions
 .. _django-messagegroups: https://github.com/dbrgn/django-messagegroups
-.. _django-social-auth: https://github.com/omab/django-social-auth
-.. _south: http://south.aeracode.org/
+.. _python-social-auth: https://github.com/omab/python-social-auth
 .. _pytest: http://pytest.org/
 .. _pytest-django: http://pytest-django.readthedocs.org/
 .. _pytest-cov: https://bitbucket.org/memedough/pytest-cov/overview
